@@ -39,11 +39,12 @@ either way.
 
 ## Category
 
-Accessibility (also fits: Other)
+AMO has no Accessibility category; submitted as "My add-on doesn't fit into any of the
+categories".
 
 ## Tags
 
-text to speech, read aloud, accessibility, tts, reading
+AMO only offers a fixed list; pick "accessibility" and "privacy" if offered.
 
 ## Licence
 
@@ -59,6 +60,14 @@ mipf4b6c0@mozmail.com
 
 (A Firefox Relay address that forwards to the owner, so users without a GitHub account can
 report problems without exposing a personal inbox.)
+
+## Developer comments (shown on the listing)
+
+This is the first version. The voice is English only for now. Some websites lay out their articles in unusual ways, so on a few sites the add-on may skip a paragraph or read something it shouldn't. If that happens, please report the page address on GitHub (https://github.com/razmikb/basic-text-to-speech/issues) or by the support email, and it will be fixed in an update.
+
+## Contributions URL
+
+https://paypal.me/yhyyyh
 
 ## Privacy policy
 

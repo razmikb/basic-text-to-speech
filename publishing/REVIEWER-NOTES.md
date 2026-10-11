@@ -1,8 +1,27 @@
 # Notes for the addons.mozilla.org reviewer
 
-Paste everything below the line into the "Notes to Reviewer" box when uploading.
+The box on the upload form has a character limit, so the version actually submitted for
+0.1.0 (2026-10-11) is the short one directly below. The longer original further down keeps
+the full file table for reference.
 
----
+## As submitted (0.1.0)
+
+Reads the current article aloud with a Piper neural voice that runs entirely inside the add-on, highlighting each sentence. No page text leaves the browser.
+
+How to test: open a Wikipedia article and click the toolbar button. The first time, the "Amy" voice (~60 MB) downloads once from huggingface.co. Right-click for "Read selection aloud" / "Read from here".
+
+Network: only downloads voice model data (.onnx + .onnx.json) from huggingface.co/diffusionstudio/piper-voices. No telemetry. wasm-unsafe-eval is needed for WebAssembly (ONNX Runtime, eSpeak NG); no JS eval.
+
+Third-party files are in src/vendor/ (checksums in src/vendor/VENDORED.md): onnxruntime-web@1.18.0 and @diffusionstudio/vits-web@1.0.3 from npm, piper_phonemize from @diffusionstudio/piper-wasm@1.0.0. All unmodified except vits-web.js, patched only to load these local copies instead of CDNs and to use 1 thread.
+
+Source/build: no build step; src/ is the source as written, not minified. Public repo: github.com/razmikb/basic-text-to-speech. To reproduce src/vendor/ byte-identically: any OS (built on Linux), Node 22+ with npm, internet access; clone, "npm ci", "npm run vendor".
+
+Linter warnings: "Unsafe call to import" in content.js loads the add-on's own modules via runtime.getURL with fixed paths. "Unexpected Callee" is the linter failing to parse Microsoft's unmodified minified ort.wasm.min.mjs. The Android warning doesn't apply: desktop only.
+
+A source archive (`git archive HEAD`) was uploaded alongside, as AMO asks for one when
+third-party code is minified or produced by a script.
+
+## Longer original
 
 **What it does.** Reads the article on the current page aloud with a neural voice (Piper)
 that runs entirely inside the add-on, highlights each sentence as it is read, and shows a
