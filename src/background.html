@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Basic Text-to-Speech — background</title>
+  </head>
+  <body>
+    <!--
+      The add-on's behind-the-scenes page. Nobody sees this.
+
+      It is declared as a page rather than a bare script for one reason: the neural voice
+      needs somewhere with a real document to run — WebAssembly and an audio element — and
+      a page can hold the hidden frame that provides it. A plain background script has no
+      document to put it in.
+    -->
+    <script type="module" src="background.js"></script>
+  </body>
+</html>

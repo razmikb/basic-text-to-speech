@@ -1,0 +1,21 @@
+{
+  "name": "basic-text-to-speech",
+  "version": "0.1.0",
+  "description": "Firefox add-on that reads web articles aloud with sentence highlighting",
+  "type": "module",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.js\"",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "check": "npm run lint && npm test",
+    "vendor": "node tools/vendor-piper.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "linkedom": "^0.18.13",
+    "prettier": "^3.9.6"
+  }
+}

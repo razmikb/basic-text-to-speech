@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Basic Text-to-Speech",
+  "version": "0.1.0",
+  "description": "Reads articles aloud with a natural voice that runs on your own computer, highlighting each sentence as it goes.",
+  "icons": {
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "basic-text-to-speech@razmikb",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "permissions": ["activeTab", "menus", "scripting", "storage"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "action": {
+    "default_title": "Read this article aloud",
+    "default_icon": "icons/icon.svg"
+  },
+  "options_ui": {
+    "page": "settings/settings.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/*.js", "lib/engines/*.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

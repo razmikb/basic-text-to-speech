@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Basic Text-to-Speech — why this page can’t be read</title>
+    <link rel="stylesheet" href="settings/settings.css" />
+    <link rel="stylesheet" href="unsupported.css" />
+  </head>
+  <body>
+    <!--
+      Shown when the toolbar button is pressed on a page the add-on cannot reach.
+
+      It exists because the alternative was silence. The click failed, a line went to a
+      console nobody opens, and on screen nothing happened at all — which is exactly what a
+      crashed add-on looks like. This page is the difference between "broken" and "not
+      allowed".
+
+      Written for someone who does not write code: no API names, no manifest, no jargon.
+      The one job is to make it clear this is Firefox's rule, not our bug.
+    -->
+    <main class="page">
+      <h1>This page can’t be read aloud</h1>
+
+      <!--
+        Which kind of page it was. Filled in by unsupported.js from the address, because
+        this one page answers for PDFs, Firefox's own pages and Mozilla's site.
+      -->
+      <p class="lead" id="summary">Firefox does not allow add-ons to run on this page.</p>
+
+      <section class="section" id="pdf-detail" hidden>
+        <h2>Why PDFs in particular</h2>
+        <p class="help">
+          Firefox opens PDFs in a viewer of its own, and it does not let any add-on see inside that
+          viewer. This add-on never gets to look at the page, so it cannot find the text, and no
+          setting or permission changes that.
+        </p>
+        <p class="help">
+          This is not specific to this add-on. It applies to every Firefox add-on, and it has been
+          this way since Firefox 60. Mozilla is aware of it — the request to allow it again has been
+          open for years and was reopened recently, but it has not been done.
+        </p>
+
+        <h2>What you can do instead</h2>
+        <p class="help">
+          Firefox’s own PDF viewer works with screen readers, and you can select text in it and copy
+          it elsewhere. Saving the PDF and opening it again will not help: the restriction is the
+          same either way.
+        </p>
+        <p class="help">
+          If a paper also exists as a normal web page — many journals publish an HTML version
+          alongside the PDF — this add-on will read that version normally.
+        </p>
+
+        <p class="note">
+          <a
+            href="https://bugzilla.mozilla.org/show_bug.cgi?id=1454760"
+            target="_blank"
+            rel="noreferrer"
+            >Follow the Firefox request to allow this</a
+          >
+        </p>
+      </section>
+
+      <section class="section" id="internal-detail" hidden>
+        <h2>Why Firefox’s own pages</h2>
+        <p class="help">
+          Pages that belong to Firefox itself — settings, <code>about:</code> pages, and the
+          add-on’s own screens — are off limits to add-ons. This is a security rule built into the
+          browser, and it protects you: an add-on that could rewrite your settings page could hide
+          what it was doing.
+        </p>
+      </section>
+
+      <section class="section" id="mozilla-detail" hidden>
+        <h2>Why this site</h2>
+        <p class="help">
+          Mozilla blocks add-ons on its own websites, including the add-ons site itself. It is the
+          same protection as for Firefox’s settings: it stops an add-on from interfering with the
+          place you go to remove it.
+        </p>
+      </section>
+
+      <section class="section" id="unknown-detail" hidden>
+        <h2>This one is unexpected</h2>
+        <p class="help">
+          This page is not a PDF and not one of Firefox’s own pages, so the add-on should have been
+          able to read it. Something stopped it from starting.
+        </p>
+        <p class="help">
+          Worth trying once: reload the page and press the button again. A page that was still
+          loading, or one that was opened before the add-on was installed, will usually work on a
+          second try.
+        </p>
+      </section>
+
+      <p class="note">
+        Everything else still works as normal. This affects only the page you pressed the button on.
+      </p>
+
+      <p class="note address" id="address" hidden></p>
+    </main>
+
+    <script type="module" src="unsupported.js"></script>
+  </body>
+</html>

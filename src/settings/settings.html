@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Basic Text-to-Speech — Settings</title>
+    <link rel="stylesheet" href="settings.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>Basic Text-to-Speech</h1>
+
+      <section class="section">
+        <h2>Voice</h2>
+        <p class="help">
+          Amy was chosen by ear; the others are offered untested. Each voice is a one-time download
+          and is then kept on this machine.
+        </p>
+
+        <!--
+          Filled in by settings.js rather than written here, because the voices are data in
+          config.js. A voice added there must appear here without this file being touched.
+        -->
+        <div class="voices" id="voices" role="radiogroup" aria-label="Voice">
+          <p class="loading" id="loading">Looking for the voices on this machine…</p>
+        </div>
+
+        <p class="note" id="note" hidden></p>
+      </section>
+
+      <section class="section credits">
+        <h2>Credits and licences</h2>
+        <p class="help">
+          Basic Text-to-Speech is free software under the
+          <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPL, version 3 or later</a>.
+          Reading happens on this computer; no page text is sent anywhere. The only thing downloaded
+          is the voice you choose, once, from
+          <a href="https://huggingface.co/rhasspy/piper-voices">Hugging Face</a>.
+        </p>
+
+        <h3>Built with</h3>
+        <ul>
+          <li>
+            <a href="https://github.com/rhasspy/piper">Piper</a> — the neural voice engine (MIT)
+          </li>
+          <li>
+            <a href="https://github.com/espeak-ng/espeak-ng">eSpeak NG</a> — turns words into sounds
+            before Piper speaks them (GPL-3.0-or-later)
+          </li>
+          <li>
+            <a href="https://github.com/diffusion-studio/vits-web">vits-web</a> and
+            <a href="https://github.com/diffusion-studio/piper-wasm">piper-wasm</a> by Diffusion
+            Studio — Piper in the browser (MIT; piper-wasm contains eSpeak NG)
+          </li>
+          <li>
+            <a href="https://github.com/microsoft/onnxruntime">ONNX Runtime Web</a> by Microsoft
+            (MIT)
+          </li>
+        </ul>
+
+        <h3>Voices</h3>
+        <ul>
+          <li>
+            Amy — from the
+            <a href="https://github.com/MycroftAI/mimic3-voices">Mycroft Mimic 3 voices</a>
+            (<a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>)
+          </li>
+          <li>
+            HFC Female and HFC Male — trained on the
+            <a href="https://ast-astrec.nict.go.jp/en/release/hi-fi-captain/">Hi-Fi-CAPTAIN</a>
+            corpus by NICT (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+              >CC BY-NC-SA 4.0</a
+            >)
+          </li>
+          <li>
+            Ryan — trained on
+            <a href="https://arxiv.org/abs/2106.08468">RyanSpeech</a>
+            (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>)
+          </li>
+          <li>
+            Joe — from the
+            <a href="https://github.com/OHF-Voice/voice-datasets">OHF voice datasets</a>
+            (<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a>)
+          </li>
+        </ul>
+        <p class="help">All voices were trained by the Piper project.</p>
+      </section>
+    </main>
+
+    <script type="module" src="settings.js"></script>
+  </body>
+</html>

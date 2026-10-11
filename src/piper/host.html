@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Basic Text-to-Speech — voice</title>
+  </head>
+  <body>
+    <!--
+      Nobody is meant to look at this page.
+
+      It exists to give the voice a home of its own. The article pages we read are other
+      people's sites, and their security rules decide what we are allowed to run there —
+      on a strict site, the WebAssembly this voice needs would simply be refused. This
+      page belongs to the add-on, so our own rules apply and the voice works the same
+      everywhere.
+
+      Keeping it in one place also means the 60MB voice is loaded once for the whole
+      browser rather than once per tab, and it stays warm between articles.
+    -->
+    <script type="module" src="host.js"></script>
+  </body>
+</html>

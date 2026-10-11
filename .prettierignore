@@ -1,0 +1,9 @@
+node_modules/
+package-lock.json
+
+# Captured copies of real web pages, used as test fixtures. They are other people's
+# markup recorded as-is — reformatting them would defeat the point of keeping them.
+tests/pages/
+
+# Vendored third-party code, copied in by `npm run vendor`. Not ours to format.
+src/vendor/

@@ -1,0 +1,38 @@
+/*
+ * The "why this page can't be read" page.
+ *
+ * Almost everything is borrowed from the settings page, which this links first — one look
+ * and one set of colours across the add-on's own screens. Only what settings has no use
+ * for lives here.
+ */
+
+.lead {
+  margin: 0 0 24px;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.section {
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  margin-top: 24px;
+}
+
+/*
+ * The address of the page that failed. Last, quiet, and selectable: it is no use while
+ * reading the explanation and every use when reporting a fault.
+ */
+.address {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  word-break: break-all;
+  user-select: all;
+}
+
+a {
+  color: var(--accent);
+}

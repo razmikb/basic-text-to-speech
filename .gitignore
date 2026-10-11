@@ -1,0 +1,46 @@
+# Secrets — never commit these
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+*.pem
+*.key
+
+# Dependencies
+node_modules/
+
+# Build / packaging output
+web-ext-artifacts/
+dist/
+*.zip
+*.xpi
+
+# Voice model files — large binaries, downloaded on demand (Phase 4)
+models/
+*.onnx
+*.bin
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+
+# Private to the owner's machine — never published
+# The working notes and AI instructions (the project's diary and plan)
+CLAUDE.md
+PLAN.md
+PROGRESS.md
+SURVEY.md
+WORKFLOW.md
+project-brief.txt
+.claude/
+# Saved copies of real web pages, used by the tests. They are other people's articles;
+# without them, the tests that need one are skipped (see tests/helpers/pages.js).
+tests/pages/

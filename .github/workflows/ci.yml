@@ -1,0 +1,27 @@
+name: CI
+
+# Runs the same checks the owner runs locally, on every push and pull request,
+# so a mistake can't sit unnoticed for twenty sessions.
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint and format check
+        run: npm run lint
+
+      - name: Tests
+        run: npm test

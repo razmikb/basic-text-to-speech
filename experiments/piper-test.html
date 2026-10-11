@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Piper voice test — Firefox TTS</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --line: #d8d8d2;
+        --ink: #1a1a18;
+        --dim: #6b6b64;
+        --bg: #faf9f6;
+        --accent: #2b5f4a;
+      }
+      body {
+        margin: 0;
+        padding: 28px 20px 60px;
+        font:
+          15px/1.55 system-ui,
+          -apple-system,
+          'Segoe UI',
+          sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 22px;
+        margin: 0 0 4px;
+      }
+      .sub {
+        color: var(--dim);
+        margin: 0 0 24px;
+      }
+      fieldset {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 0 0 18px;
+        background: #fff;
+      }
+      legend {
+        font-weight: 600;
+        padding: 0 6px;
+      }
+      label {
+        display: block;
+        margin: 10px 0 4px;
+        font-weight: 600;
+        font-size: 13px;
+      }
+      select,
+      textarea,
+      button {
+        font: inherit;
+      }
+      select,
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        color: var(--ink);
+      }
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 14px;
+      }
+      button {
+        padding: 9px 16px;
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        background: var(--accent);
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      button.secondary {
+        background: #fff;
+        color: var(--accent);
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      #log {
+        white-space: pre-wrap;
+        font:
+          12.5px/1.5 ui-monospace,
+          Consolas,
+          monospace;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        min-height: 120px;
+        max-height: 320px;
+        overflow: auto;
+      }
+      .timing {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-top: 10px;
+      }
+      .note {
+        font-size: 13px;
+        color: var(--dim);
+        margin-top: 6px;
+      }
+      .bar {
+        height: 8px;
+        background: #eceae4;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      .bar > i {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: var(--accent);
+        transition: width 0.15s;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Piper voice test</h1>
+      <p class="sub">
+        Throwaway page. Answers three questions: does Piper run in Firefox, how fast does it start
+        speaking, and does it sound good enough.
+      </p>
+
+      <fieldset>
+        <legend>1 · Voice</legend>
+        <label for="voice">Choose a voice, then Download it once</label>
+        <select id="voice">
+          <option value="en_US-amy-medium">Amy — medium (female, recommended)</option>
+          <option value="en_US-lessac-medium">Lessac — medium (female, recommended)</option>
+          <option value="en_US-hfc_female-medium">HFC female — medium</option>
+          <option value="en_US-hfc_male-medium">HFC male — medium</option>
+          <option value="en_US-ryan-medium">Ryan — medium (male)</option>
+          <option value="en_US-joe-medium">Joe — medium (male)</option>
+          <option value="en_US-lessac-high">Lessac — high (bigger, slower to load)</option>
+          <option value="en_US-ryan-high">Ryan — high (bigger, slower to load)</option>
+        </select>
+        <div class="row">
+          <button id="download">Download voice</button>
+          <button id="listStored" class="secondary">Show downloaded</button>
+          <button id="flush" class="secondary">Delete all downloaded</button>
+        </div>
+        <div class="bar"><i id="progress"></i></div>
+        <p class="note">
+          Downloads once (~60MB), then stays on this machine. Nothing you type is ever sent anywhere
+          — the voice runs inside the browser.
+        </p>
+      </fieldset>
+
+      <fieldset>
+        <legend>2 · Text</legend>
+        <label for="text">Paste a real article here — long text is the honest test</label>
+        <textarea id="text">
+The board voted on Tuesday to extend the program through 2027, a decision that arrived after months of hearings, three revised budgets, and a public comment period that drew 1,842 responses. "We heard the community," the superintendent said. "They told us, in no uncertain terms, that this mattered." Funding will rise by 4.5 percent — roughly $12.3 million — though officials cautioned that the figure depends on state allocations that won't be finalized until March. Critics remain unconvinced; Dr. Elena Vasquez, who has studied similar programs at St. Mary's University since 2009, called the timeline "optimistic at best."</textarea>
+        <div class="row">
+          <button id="speak">Speak it</button>
+          <button id="stop" class="secondary">Stop</button>
+        </div>
+        <div class="timing" id="timing"></div>
+        <p class="note">
+          The number that matters is <strong>time to first sound</strong>. Near-instant start was a
+          founding requirement for this add-on.
+        </p>
+      </fieldset>
+
+      <fieldset>
+        <legend>3 · What happened</legend>
+        <div id="log">Loading the Piper library…</div>
+      </fieldset>
+    </main>
+
+    <script type="module">
+      const logEl = document.getElementById('log');
+      const timingEl = document.getElementById('timing');
+      const progressEl = document.getElementById('progress');
+      const voiceEl = document.getElementById('voice');
+      const textEl = document.getElementById('text');
+
+      let audio = null;
+      let tts = null;
+
+      function log(message) {
+        const time = new Date().toLocaleTimeString();
+        logEl.textContent += `\n[${time}] ${message}`;
+        logEl.scrollTop = logEl.scrollHeight;
+      }
+
+      function setBusy(busy) {
+        for (const id of ['download', 'speak', 'listStored', 'flush']) {
+          document.getElementById(id).disabled = busy;
+        }
+      }
+
+      // Loaded from a CDN because this is a scratch page with no build step.
+      // The add-on itself would bundle this rather than fetch it.
+      logEl.textContent = 'Loading the Piper library from CDN…';
+      try {
+        tts = await import('https://cdn.jsdelivr.net/npm/@diffusionstudio/vits-web@1.0.3/+esm');
+        log('Library loaded. Firefox can at least fetch and parse it.');
+        log(`Browser: ${navigator.userAgent}`);
+        const voices = await tts.stored();
+        log(
+          voices.length
+            ? `Already downloaded: ${voices.join(', ')}`
+            : 'No voices downloaded yet — press "Download voice" first.'
+        );
+      } catch (error) {
+        log(`FAILED to load the library: ${error && error.message}`);
+        log('That is a real result: this path does not work in Firefox as-is.');
+      }
+
+      document.getElementById('download').addEventListener('click', async () => {
+        if (!tts) return;
+        const voiceId = voiceEl.value;
+        setBusy(true);
+        progressEl.style.width = '0';
+        log(`Downloading ${voiceId} …`);
+        const started = performance.now();
+        try {
+          await tts.download(voiceId, (p) => {
+            const pct = Math.round((p.loaded * 100) / p.total);
+            progressEl.style.width = `${pct}%`;
+          });
+          const secs = ((performance.now() - started) / 1000).toFixed(1);
+          progressEl.style.width = '100%';
+          log(`Downloaded ${voiceId} in ${secs}s. Stored on this machine; one time only.`);
+        } catch (error) {
+          log(`Download failed: ${error && error.message}`);
+        }
+        setBusy(false);
+      });
+
+      document.getElementById('speak').addEventListener('click', async () => {
+        if (!tts) return;
+        const voiceId = voiceEl.value;
+        const text = textEl.value.trim();
+        if (!text) return log('Nothing to speak.');
+
+        setBusy(true);
+        timingEl.textContent = '';
+        log(`Generating speech with ${voiceId} … (${text.length} characters)`);
+        const started = performance.now();
+        try {
+          const wav = await tts.predict({ text, voiceId });
+          const generated = performance.now() - started;
+
+          if (audio) audio.pause();
+          audio = new Audio();
+          audio.src = URL.createObjectURL(wav);
+
+          audio.addEventListener('playing', () => {
+            const total = ((performance.now() - started) / 1000).toFixed(2);
+            timingEl.textContent = `Time to first sound: ${total}s`;
+            log(`Speaking. Time to first sound: ${total}s`);
+          });
+          audio.addEventListener('ended', () => log('Finished.'));
+
+          await audio.play();
+          log(`Audio generated in ${(generated / 1000).toFixed(2)}s.`);
+        } catch (error) {
+          log(`Speaking failed: ${error && error.message}`);
+          log('If this mentions a missing voice, press "Download voice" first.');
+        }
+        setBusy(false);
+      });
+
+      document.getElementById('stop').addEventListener('click', () => {
+        if (audio) {
+          audio.pause();
+          log('Stopped.');
+        }
+      });
+
+      document.getElementById('listStored').addEventListener('click', async () => {
+        if (!tts) return;
+        const voices = await tts.stored();
+        log(voices.length ? `Downloaded: ${voices.join(', ')}` : 'Nothing downloaded yet.');
+      });
+
+      document.getElementById('flush').addEventListener('click', async () => {
+        if (!tts) return;
+        await tts.flush();
+        log('Deleted all downloaded voices.');
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,206 @@
+/*
+ * The settings page.
+ *
+ * This is OUR page, not someone else's, so the `ftts-` namespace rule does not apply here
+ * — there is nothing to collide with. Everything else about being a good guest still does:
+ * it follows the browser's own light and dark setting rather than insisting on one.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #ffffff;
+  --fg: #1a1a1a;
+  --muted: #5c5c5c;
+  --line: #d8d8d8;
+  --raised: #f5f5f5;
+  --accent: #0060df;
+  --accent-fg: #ffffff;
+  --danger: #c50042;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1b22;
+    --fg: #fbfbfe;
+    --muted: #b1b1b8;
+    --line: #3a3944;
+    --raised: #2b2a33;
+    --accent: #00ddff;
+    --accent-fg: #1c1b22;
+    --danger: #ff9aa2;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font:
+    15px/1.5 system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+}
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding-block: 32px 48px;
+  padding-inline: 16px;
+}
+
+h1 {
+  margin: 0 0 24px;
+  font-size: 22px;
+}
+
+h2 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.help,
+.note {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.note {
+  margin-block: 16px 0;
+}
+
+.voices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/*
+ * One voice. A label wrapping its own radio, so the whole row is clickable rather than
+ * just the dot — the same reasoning as the 48px buttons on the control bar.
+ */
+.voice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--raised);
+  cursor: pointer;
+}
+
+.voice:hover {
+  border-color: var(--accent);
+}
+
+.voice:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.voice[data-current='true'] {
+  border-color: var(--accent);
+}
+
+.voice input {
+  margin: 0;
+  accent-color: var(--accent);
+  flex: none;
+}
+
+.voice-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.voice-name {
+  font-weight: 600;
+}
+
+.voice-about {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/*
+ * Whether the voice is on this machine. Kept to the right and quiet: it matters when
+ * choosing and never afterwards.
+ */
+.voice-state {
+  flex: none;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.voice[data-state='working'] .voice-state {
+  color: var(--accent);
+}
+
+/*
+ * Remove. Quiet until you go near it, because it sits beside the thing you click to CHOOSE
+ * a voice and must never be the eye-catching control on the row.
+ */
+.voice-remove {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.voice-remove:hover,
+.voice-remove:focus-visible {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* A voice mid-download must not be swapped for another halfway through. */
+.voice[data-busy='true'] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+@media (max-width: 420px) {
+  .voice {
+    flex-wrap: wrap;
+  }
+
+  .voice-state {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+.credits {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.credits h3 {
+  margin: 16px 0 4px;
+  font-size: 14px;
+}
+
+.credits ul {
+  margin: 0;
+  padding-inline-start: 20px;
+}
+
+.credits a {
+  color: var(--accent);
+}
