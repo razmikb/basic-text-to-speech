@@ -3,6 +3,12 @@
 A Firefox add-on that reads web articles aloud with a natural voice that runs on your own
 computer, highlighting each sentence as it is read.
 
+![The add-on reading a Wikipedia article: the current sentence is highlighted and the
+playback bar sits in the corner](docs/screenshot.png)
+
+<sub>Page shown: the Wikipedia article
+[Userkare](https://en.wikipedia.org/wiki/Userkare), CC BY-SA 4.0.</sub>
+
 - **Private by design.** The voice is [Piper](https://github.com/rhasspy/piper), a neural
   text-to-speech model, running inside the add-on. Page text never leaves your machine; no
   account, no cloud, no tracking.

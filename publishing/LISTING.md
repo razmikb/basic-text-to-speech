@@ -55,9 +55,10 @@ https://github.com/razmikb/basic-text-to-speech
 
 ## Support email
 
-**Owner to choose before upload** (decided 2026-10-11: offer an email so users without a
-GitHub account can report problems). Shown publicly on the listing, so a separate
-address just for the add-on is recommended over a personal inbox.
+mipf4b6c0@mozmail.com
+
+(A Firefox Relay address that forwards to the owner, so users without a GitHub account can
+report problems without exposing a personal inbox.)
 
 ## Privacy policy
 
